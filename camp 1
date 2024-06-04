@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaming Extravaganza</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome to the Gaming Extravaganza</h1>
+    </header>
+    <main>
+        <section>
+            <h2>About the Event</h2>
+            <p>The Gaming Extravaganza is the ultimate event for gaming enthusiasts. Join us for a weekend filled with exciting games, tournaments, and workshops led by industry experts. Whether you're a casual gamer or a competitive player, there's something for everyone!</p>
+        </section>
+        <section>
+            <h2>Featured Games</h2>
+            <div class="game">
+                <h3>Game 1: Battle Royale</h3>
+                <p>Experience the thrill of Battle Royale, where players fight to be the last one standing in an ever-shrinking arena.</p>
+            </div>
+            <div class="game">
+                <h3>Game 2: Racing Legends</h3>
+                <p>Get behind the wheel in Racing Legends and compete against others in high-speed races across various tracks.</p>
+            </div>
+            <div class="game">
+                <h3>Game 3: Fantasy Quest</h3>
+                <p>Embark on an epic adventure in Fantasy Quest, a role-playing game filled with magic, monsters, and quests.</p>
+            </div>
+        </section>
+        <section>
+            <h2>How to Register</h2>
+            <p>Ready to join the fun? Visit our <a href="https://www.gamingextravaganza.com/register">registration page</a> to sign up for the event.</p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Gaming Extravaganza. All rights reserved.</p>
+    </footer>
+</body>
+</html>
