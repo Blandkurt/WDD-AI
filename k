@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webpage with Banner, Main Section, and Multiple Divs</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .banner {
+            background-color: red;
+            color: black;
+            width: 100%;
+            padding-top: 30px;
+            padding-bottom: 20px;
+            text-align: center;
+            font-size: 48px;
+        }
+        main {
+            width: 100%;
+            border: 2px solid lightblue;
+            padding: 20px;
+            box-sizing: border-box; /* Ensures padding is included in the element's total width and height */
+        }
+        .content-div {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="banner">
+        Cities
+    </div>
+    <main>
+        <div id="div1" class="content-div">Content of div1</div>
+        <div id="div2" class="content-div">Content of div2</div>
+        <div id="div3" class="content-div">Content of div3</div>
+        <div id="div4" class="content-div">Content of div4</div>
+        <div id="div5" class="content-div">Content of div5</div>
+        <div id="div6" class="content-div">Content of div6</div>
+        <div id="div7" class="content-div">Content of div7</div>
+        <div id="div8" class="content-div">Content of div8</div>
+        <div id="div9" class="content-div">Content of div9</div>
+        <div id="div10" class="content-div">Content of div10</div>
+        <div id="div11" class="content-div">Content of div11</div>
+        <div id="div12" class="content-div">Content of div12</div>
+        <div id="div13" class="content-div">Content of div13</div>
+        <div id="div14" class="content-div">Content of div14</div>
+        <div id="div15" class="content-div">Content of div15</div>
+        <div id="div16" class="content-div">Content of div16</div>
+        <div id="div17" class="content-div">Content of div17</div>
+        <div id="div18" class="content-div">Content of div18</div>
+        <div id="div19" class="content-div">Content of div19</div>
+        <div id="div20" class="content-div">Content of div20</div>
+    </main>
+</body>
+</html>
