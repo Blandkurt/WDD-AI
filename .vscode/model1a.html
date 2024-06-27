@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Summer CAM WDD Using AI</title>
+  <!-- Include Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <style>
+    .banner {
+      background-color: rgb(0, 0, 0);
+      padding: 20px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    main div {
+      border: 1px solid rgb(255, 0, 0);
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+    #div1 img {
+      width: 400px;
+      height: 300px;
+    }
+
+    #plot{
+      height: 500px;
+    }
+  </style>
+</head>
+<body>
+  <div class="banner">Summer CAM WDD Using AI</div>
+
+  <main>
+    <!-- 20 div elements with unique ids -->
+    <div id="div1">
+      <h2>Section 1. What is a linear regression?</h2>
+      <ul>
+        <li>It tries to find a linear function y=wx+b.</li>
+        <li>The linear function tries to fit a collection of number pairs, such as house sales, (sqft, sale price).</li>
+        <li>There is no linear function that can accurately fit all number pairs. So, we have to find the 'best' one.</li>
+        <li>By being best, we design a so-called cost function, such as mean square error invented by the great Carl Gauss.</li>
+        <li>This is what machine learning is doing.<br><img src="linearRegression1.jpg" alt="Linear Regression Image"></li>
+      </ul>
+    </div>
+
+    <div id="div2">
+      <h2>Section 2. The JavaScript libraries to use</h2>
+      <p>We will use TensorFlow.js to train the model.</p>
+      <p>Click the 'Run' button below to import two JavaScript libraries.</p>
+    </div>
+
+    <div id="div3">
+      <button id="runButton">Run</button>
+    </div>
+
+    <div id="div4"></div>
+
+    <div id="div5">
+      <h2>Section 3. Using the dataset from Google</h2>
+      <p>We will use a dataset from Google, <a href="https://storage.googleapis.com/tfjs-tutorials/carsData.json">https://storage.googleapis.com/tfjs-tutorials/carsData.json</a>.</p>
+      <button id="loadDatasetButton">Load the dataset</button>
+    </div>
+
+    <div id="div6"></div>
+
+    <div id="div7">
+      <h2>Section 4. Extract the Miles_per_Gallon and Horsepower</h2>
+      <p>We will use only Miles_per_gallon:value and Horsepower:value for our training.</p>
+      <button onclick="extractData()">Extract training dataset</button>
+      
+  </div>
+
+  <div id="div7a"></div>
+
+  <div id="div8">
+    <h2> Section 5. Visualize the training dataset</h2>
+    <button onclick="visualizeDataset()">Visualize the training dataset</button>
+    <div id="plot"></div>
+  </div>
+
+
+  <div id="div9">
+    <h2>Section 6. Define the model</h2>
+    <p>We will define a TensorFlow sequential model with one input x and one output y.</p>
+    <button onclick="defineModel()">Define Model</button>
+  </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.8.0/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-vis@3.0.0/dist/tf-vis.min.js"></script>
+
+  </div>
+
+  <div id="div10">
+    <button id="showModelSummaryButton" onclick="showModelSummary()">Show summary of the model</button>
+    <div id="modelSummary"></div>
+  </div>
+
+<div id="div11">
+  <h2>Section 7. Prepare the training set</h2>
+  <p>We will prepare the extracted data.</p>
+  <ul>
+
+    </div>
+  
+      <li>Convert the extracted data to Tensor</li>
+      <li>Shuffle the data</li>
+      <li>Normalize to the range between 0 and 1 for fast computation</li>
+  </ul>
+  <button onclick="prepareDataset()">Prepare the dataset</button>
+</div>
+<div id="div12">
+  <h2>Section 8. Visualize the inputs and labels for training</h2>
+  <button id="visualizeInputsAndLabelsButton" onclick="visualizeInputsAndLabels()">Visualize the inputs and labels</button>
+</div>
+
+<div id="div13">
+  <h2>Section 9. Train the model</h2>
+  <button id="trainModelButton" onclick="trainModel()">Train the model using prepared data</button>
+</div>
+<div id="div13a"></div>
+
+<div id="div14">
+  <h2>Section 10. Generate the dataset for testing</h2>
+  <button id="generateTestDataButton" onclick="generateTestData()">Generate test dataset</button>
+</div>
+
+<div id="div15">
+  <h2>Section 11. Visualize the predictions</h2>
+  <button onclick="visualizePredictions()">Visualize the predictions</button>
+</div>
+
+<div id="div16"></div>
+
+  </main>
+
+  <!-- Include Bootstrap JavaScript -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+ 
+ <script>
+    var globalDataset; // Global variable to store the dataset
+    var extractDataset; // Global variable to store the extracted dataset
+
+    document.getElementById("runButton").addEventListener("click", function() {
+      var script1 = document.createElement("script");
+      script1.src = "https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js";
+      script1.onload = function() {
+        var script2 = document.createElement("script");
+        script2.src = "https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-vis@1.0.2/dist/tfjs-vis.umd.min.js";
+        script2.onload = function() {
+          var consoleOutput = document.getElementById("div4");
+          consoleOutput.innerHTML = "Loaded TensorFlow.js and TensorFlow.js Visualization libraries.";
+        };
+        document.head.appendChild(script2);
+      };
+      document.head.appendChild(script1);
+    });
+
+    document.getElementById("loadDatasetButton").addEventListener("click", function() {
+      fetch("https://storage.googleapis.com/tfjs-tutorials/carsData.json")
+        .then(response => response.json())
+        .then(data => {
+          globalDataset = data; // Save the dataset to the global variable
+          var consoleOutput = document.getElementById("div6");
+          consoleOutput.innerHTML = data.slice(0, 10);
+        })
+        .catch(error => {
+          var consoleOutput = document.getElementById("div6");
+          consoleOutput.innerHTML = "Error loading the dataset.";
+        });
+    });
+
+    function extractData() {
+      if (globalDataset) {
+        extractDataset = globalDataset.map(item => {
+          return {
+            Miles_per_Gallon: item.Miles_per_Gallon,
+            Horsepower: item.Horsepower
+          };
+        });
+        var consoleOutput = document.getElementById("div7a");
+        consoleOutput.innerHTML = JSON.stringify(extractDataset.slice(0, 10));
+      } else {
+        var consoleOutput = document.getElementById("div7a");
+        consoleOutput.innerHTML = "No dataset loaded.";
+      }
+    }
+
+
+
+    function visualizeDataset(){ 
+      if (extractDataset) {
+        const horsepowerValues = extractDataset.map(item => item.Horsepower);
+        const mpgValues = extractDataset.map(item => item.Miles_per_Gallon);
+
+        const trace = {
+            x: horsepowerValues,
+            y: mpgValues,
+            mode: 'markers',
+            type: 'scatter'
+        };
+
+        const layout = {
+            title: 'Horsepower vs Miles_per_Gallon',
+            xaxis: {
+                title: 'Horsepower',
+                range: [0, 240],
+                dtick: 20
+            },
+            yaxis: {
+                title: 'MPG',
+                range: [0, 50],
+                dtick: 10
+            }
+        };
+
+        Plotly.newPlot('plot', [trace], layout);
+
+      } else {
+        var consoleOutput = document.getElementById("plot");
+        consoleOutput.innerHTML = "No dataset extracted.";
+      }
+    }
+
+
+    let model;
+
+    function defineModel(){
+      if (extractDataset) {
+        model = tf.sequential();
+        model.add(tf.layers.dense({inputShape: [1], units: 1}));
+        model.add(tf.layers.dense({units: 1}));
+     
+      } else {
+        var consoleOutput = document.getElementById("modelSummary");
+        consoleOutput.innerHTML = "No dataset extracted.";
+      }
+    }
+
+
+    function showModelSummary() {
+            const container = document.getElementById('modelSummary');
+            tfvis.show.modelSummary(container, model);    
+      }
+
+
+      let preparedData;
+
+function prepareDataset() {
+        // Extract horsepower as inputs and mpg as labels
+        const inputs = extractDataset.map(item => item.Horsepower);
+        const labels = extractDataset.map(item => item.Miles_per_Gallon);
+
+         // Convert inputs and labels to TensorFlow tensors with shape [*, 1]
+        const inputTensor = tf.tensor2d(inputs, [inputs.length, 1]);
+        const labelTensor = tf.tensor2d(labels, [labels.length, 1]);
+
+        // Normalize inputs and labels
+        const inputMax = inputTensor.max();
+        const inputMin = inputTensor.min();
+        const labelMax = labelTensor.max();
+        const labelMin = labelTensor.min();
+
+        const normalizedInputs = inputTensor.sub(inputMin).div(inputMax.sub(inputMin));
+        const normalizedLabels = labelTensor.sub(labelMin).div(labelMax.sub(labelMin));
+
+        preparedData = {
+            inputs: normalizedInputs,
+            labels: normalizedLabels,
+            inputMax: inputMax,
+            inputMin: inputMin,
+            labelMax: labelMax,
+            labelMin: labelMin
+        };
+}
+  </script>
+
+<script>
+  function visualizeInputsAndLabels() {
+   const inputValues = preparedData.inputs.dataSync();
+   const labelValues = preparedData.labels.dataSync();
+
+   const data = { values: [] };
+   for (let i = 0; i < inputValues.length; i++) {
+       data.values.push({ x: inputValues[i], y: labelValues[i] });
+   }
+
+   const surface = { name: 'Inputs vs Labels', tab: 'Scatter Plot' };
+   const plotData = { values: data.values, tab: 'Scatter Plot' };
+   tfvis.render.scatterplot(
+       div12, plotData, {
+           xLabel: 'Inputs',
+           yLabel: 'Labels',
+           height: 300,
+           fontSize: 12
+       }
+   );
+}
+</script>
+
+<script>
+  async function trainModel() {
+      // Define the loss, optimizer, and metrics
+      const loss = 'meanSquaredError';
+      const optimizer = tf.train.adam();
+      const metrics = ['mse'];
+
+      // Train the model using prepared data
+      await model.compile({ loss, optimizer, metrics });
+      const history = await model.fit(preparedData.inputs, preparedData.labels, {
+          batchSize: 32,
+          epochs: 50,
+          /*
+          callbacks: tfvis.show.fitCallbacks(
+              { name: 'Training Performance', tab: 'Training Performance' },
+              ['loss', 'mse'],
+              { height: 200 }
+          )
+          */
+          callbacks: tfvis.show.fitCallbacks(
+              div13a, ['loss', 'mse'],
+              { name: 'Training Performance', tab: 'Training Performance', height: 200 }
+          )
+
+      });
+  }
+</script>
+<script>
+  let testDataInputs = [];
+  let testDataPredictions = [];
+
+  function generateTestData() {
+      // Define the number of features
+      const numFeatures = 1;
+
+      // Generate uniform range of numbers between 0 and 1 for inputs
+      const numInputs = 100;
+      const inputs = tf.randomUniform([numInputs, numFeatures]);
+
+      // Use the trained model to predict the results
+      const predictions = model.predict(inputs);
+
+      // Un-normalize the data by doing the inverse of the min-max scaling
+      /*
+      const unnormalizedInputs = inputs.mul(inputMax.sub(inputMin)).add(inputMin);
+      const unnormalizedPredictions = predictions.mul(outputMax.sub(outputMin)).add(outputMin);
+      */
+      const unnormalizedInputs = inputs.mul(preparedData.inputMax.sub(preparedData.inputMin)).add(preparedData.inputMin);
+      const unnormalizedPredictions = predictions.mul(preparedData.labelMax.sub(preparedData.labelMin)).add(preparedData.labelMin);
+
+
+
+      // Save the un-normalized inputs and predictions to global variables
+      testDataInputs = unnormalizedInputs.arraySync();
+      testDataPredictions = unnormalizedPredictions.arraySync();
+  }
+</script>
+
+<script>
+      function visualizePredictions() {
+
+          /* not from AI --- start*/
+          const predictedPoints = Array.from(testDataInputs).map((val, i) => {
+              return {x: val, y: testDataPredictions[i]}
+          });
+
+          const originalPoints = extractDataset.map(d => ({
+              x: d.Horsepower, y: d.Miles_per_Gallon,
+          }));
+          /* not from AI --- start*/
+
+          const data = {
+              values: [originalPoints, predictedPoints],
+              //values: [extractedData, testDataInputs],
+              series: ['Extracted Data', 'Test Data Predictions'],
+          };
+          const surface = tfvis.render.scatterplot(
+              div16, data, {xLabel: 'X', yLabel: 'Y', height: 300, series: ['Extracted Data', 'Test Data Predictions']}
+          );
+      }
+
+</script>
+
+</body>
+</html>

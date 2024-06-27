@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Summer CAM WDD Using AI</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: silver;
+    }
+    #div1, #div2, #div3, #div4, #div5, #div6, #div7 {
+      border-bottom: 1px solid black;
+    }
+  </style>
+  <script src="data.js"></script>
+  <script>
+    function loadLibraries() {
+      var script1 = document.createElement('script');
+      script1.src = "https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js";
+      document.head.appendChild(script1);
+
+      var script2 = document.createElement('script');
+      script2.src = "https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-vis@1.0.2/dist/tfjs-vis.umd.min.js";
+      document.head.appendChild(script2);
+      document.getElementById('div3').innerHTML="Libraries loaded successfully!";
+      //console.log("Libraries loaded successfully!");
+    }
+
+    let mnistData;
+    async function loadDataset() {
+      try {
+        mnistData = new MnistData();
+        await mnistData.load();
+        displayDatasetShape(mnistData);
+
+
+        //console.log('Dataset and labels loaded successfully');
+      } catch (error) {
+        console.error('Error loading dataset and labels:', error);
+      }
+    }
+    function displayDatasetShape(data) {
+      const images = data.trainImages;
+      const labels = data.trainLabels;
+      const imagesShape = images.length;
+      const labelsShape = labels.length;
+      document.getElementById('div6').innerText = `Images shape: ${imagesShape}, Labels shape: ${labelsShape}`; 
+    }
+   
+ async   function showImages() {
+  
+  const examples = mnistData.nextTestBatch(20); // Obtain 20 images from mnistData
+  const surfaceElement = document.getElementById('div7'); // Get the surface element by its ID
+
+  const images = examples.xs;
+  for (let i = 0; i < 20; i++) {
+    const imageTensor = images.slice([i, 0], [1, 784]).reshape([28,28,1]); // Extract the image tensor
+    // const imageDataArray = imageTensor.reshape([28,28,1]); // Convert the tensor to a regular array
+
+    const imageElement = document.createElement('canvas'); // Create a canvas element
+    imageElement.width = 28;
+    imageElement.height = 28;
+    const ctx = imageElement.getContext('2d');
+    const imageData = ctx.createImageData(28, 28); // Create an ImageData object
+
+    await tf.browser.toPixels(imageTensor, imageElement);
+    //for (let j = 0; j < imageDataArray.length; j++) {
+    //  imageData.data[j] = imageDataArray[j]; // Set the pixel data for the image
+    //}
+
+    // ctx.putImageData(imageData, 0, 0); // Draw the image data onto the canvas
+
+    surfaceElement.appendChild(imageElement); // Add the canvas element to the surface
+
+    const label=examples.labels.slice([i,0], [1, 10]);
+    const labelDiv = document.createElement('div');
+    labelDiv.textContent = `Label: ${label}`;
+    surfaceElement.appendChild(labelDiv);
+  }
+
+}
+  </script>
+</head>
+<body>
+  <div class="banner">
+    <h1>Summer CAM WDD Using AI</h1>
+  </div>
+
+  <main>
+    <div id="div1">
+      <h2>Section 1. What is a convolutional neural network?</h2>
+      <ul>
+        <li>It tries to find an edge or pattern in an image</li>
+        <li>It usually consists of one or more convolution plus pooling layer, and one fully connected (FC) layer</li>
+        <li>When doing convolution on an image, we use a 5x5 filter. Further, we may apply several such filters to detect edge/pattern along several lines</li>
+        <li>The cost function will be</li>
+        <li>The last layer is output lay where we use a so-called Sigmoid activation, so that several outputs can be used.<br>
+          <img src="convolutionExample3.jpg" alt="Convolution Example" width="600" height="300">
+        </li>
+      </ul>
+    </div>
+    <div id="div2">
+      <h2>Section 2. Load TensorFlow for JavaScript libraries</h2>
+      <p>We will use TensorFlow.js to train the model.</p>
+      <p>Click the 'Run' button below to import two JavaScript libraries.</p>
+      <p>import https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js for defining and training models.</p>
+      <p>import https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-vis@1.0.2/dist/tfjs-vis.umd.min.js for web browser visualization.</p>
+      <button onclick="loadLibraries()">Run</button>
+    </div>
+    <div id="div3"></div>
+    <div id="div4">
+      <h2>Section 3. The dataset of images</h2>
+      <p>We will use a dataset from Google, <a href="https://storage.googleapis.com/learnjs-data/model-builder/mnist_images.png">https://storage.googleapis.com/learnjs-data/model-builder/mnist_images.png</a>, and their labels, <a href="https://storage.googleapis.com/learnjs-data/model-builder/mnist_labels_uint8">https://storage.googleapis.com/learnjs-data/model-builder/mnist_labels_uint8</a>.</p>
+      <p>The dataset is a big image file. It contains 65,000 images, each of size 28 x 28 x 1. The label file contains 65,000 labels. Each image uses 10 numbers to indicate which digit the image represents.</p>
+    </div>
+    <div id="div5">
+      <h2>Section 4. The JavaScript module to process the dataset</h2>
+      <p>We will use a JavaScript class from './data.js' to process the dataset.</p>
+      <button onclick="loadDataset()">Load the dataset</button>
+    </div>
+    <div id="div6"></div>
+    <div id="div7">
+      <h2>Section 5. We will show 20 images from the dataset</h2>
+      <button onclick="showImages()">Show the first 20 images</button>
+    </div>
+    <div id="div8"></div>
+    <div id="div9"></div>
+    <div id="div10"></div>
+    <div id="div11"></div>
+    <div id="div12"></div>
+    <div id="div13"></div>
+    <div id="div14"></div>
+    <div id="div15"></div>
+    <div id="div16"></div>
+    <div id="div17"></div>
+    <div id="div18"></div>
+    <div id="div19"></div>
+    <div id="div20"></div>
+  </main>
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

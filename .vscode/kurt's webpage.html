@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Welcome to ASU</title>
+  <style>
+    #div1 {
+      width: 100%;
+      background-color: darkred;
+    }
+    
+    #banner {
+      background-color: darkblue;
+      padding: 20px;
+      text-align: center;
+      color: white;
+    }
+    
+    #div2 {
+      display: flex;
+      justify-content: space-between;
+      margin: 10px;
+      background-color: lightgray;
+    }
+    
+    .name-card {
+      width: 200px;
+      padding: 10px;
+      text-align: center;
+    }
+    
+    .name-card img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+    
+    #div3 {
+      display: flex;
+      background-color: lightgray;
+      padding: 20px;
+    }
+    
+    #left-column {
+      width: 25%;
+      border-right: 1px solid red;
+    }
+    
+    #left-column h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+    
+    #left-column ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    #left-column li {
+      margin-bottom: 5px;
+    }
+    
+    #div4 {
+      width: 75%;
+      position: relative;
+    }
+    
+    #div4 img {
+      width: 100%;
+      height: 75%;
+      object-fit: cover;
+    }
+    
+    #div4 .div4_paragraph {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 18px;
+      color: white;
+    }
+    
+    #div4 .div4_paragraph a {
+      color: white;
+      text-decoration: underline;
+    }
+    
+    #div5 {
+      background-color: lightgray;
+      padding: 20px;
+      display: flex;
+    }
+    
+    #div5 .right-column {
+      width: 40%;
+      background-color: gold;
+      padding: 20px;
+      position: relative;
+    }
+    
+    #div5 .right-column::before {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 75%;
+      background-image: url("div4.jpg");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: top right;
+      z-index: -1;
+    }
+    
+    #div5 .right-column ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    #div5 .right-column li {
+      margin-bottom: 10px;
+    }
+    
+    #div5 .right-column li a {
+      color: black;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div id="div1">
+    <div id="banner">
+      <h2>Welcome to my webpage</h2>
+    </div>
+  </div>
+  
+  <div id="div2">
+    <div class="name-card">
+      <img src="https://www.dexerto.com/cdn-cgi/image/width=3840,quality=75,format=auto/https://editors.dexerto.com/wp-content/uploads/2023/08/24/jujutsu-kaisen-shibuya-trailer-sukuna-1024x576.jpeg" alt="Picture 1">
+      <p>fuga</p>
+      <p>jujutsu-kaisen-shibuya-trailer-sukuna-1024x576</p>
+      <p>shibuya</p>
+    </div>
+    <div class="name-card">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTE2Zy623-uWRJK_I0t9LYLLBw7ufrttroFpw&s" alt="Picture 2">
+      <p>sukuna vs gojo</p>
+      <p>domain clash</p>
+      <p>shibuya</p>
+    </div>
+    <div class="name-card">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcST9XnVA8cEONAk8m4BRWAjy7rznC_XRZQ7og&s" alt="Picture 3">
+      <p>gojo</p>
+      <p>eliginment gojo</p>
+      <p>pillers</p>
+    </div>
+    <div class="name-card">
+      <img src="https://i.redd.it/criticising-chapter-236-analytically-repost-with-tldr-v0-vvl1kqt30epb1.jpg?width=1142&format=pjpg&auto=webp&s=019868bfc79de6b54ab495cf617fd798fda88c8b" alt="Picture 4">
+      <p>sukuna vs gojo</p>
+      <p>fight 4</p>
+      <p>manga 4</p>
+    </div>
+  </div>
+  
+  <div id="div3">
+    <div id="left-column" class="left-column">
+      <h2>Table of Contents</h2>
+      <ul>
+        <li>History</li>
+        <li>Gojo</li>
+        <li>hidden inventory</li>
+        <li>the big three</li>
+
+        
+      </ul>
+    </div>
+    <div id="right-column"  class="right-column">
+      <h2>The history of jujutsu-kaisen</h2>
+      <p>Info at the bottom</p>
+    </div>
+  </div>
+  <p class="div4_paragraph">jjk fandom. <a href="https://jujutsu-kaisen.fandom.com/wiki/List_of_Characters">Click here</a></p>
+  </div>
+  <div id="div4">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTG-inhxMJ9b_fZZWEfsRCwC3RARzPpcWqJBg&s" alt="My Dream Vacation" />
+    <p class="div4_paragraph">the mc. <a href="#div5">Click here</a></p>
+  </div>
+  
+  <!--
+  <div id="div5">
+    <div class="right-column">
+      <ul>
+        <li>Welcome to ASU <a href="https://www.asurams.edu">https://www.asurams.edu</a></li>
+        <li>Summer Camp 2024 - WDD-AI <a href="https://backupsprits.com/camp">https://backupsprits.com/camp</a></li>
+      </ul>
+    </div>
+  </div>
+  -->
+
+  <div></div>
+
+
+
+
+
+  <script>
+    let div3Content = [];
+    div3Content[0]="<h2> History </h2>"
+                  + "<p> Sukuna has been incarnated in Yuji Itadori. Kenjaku was able to acquire Prison Realm and form an alliance with powerful unregistered cursed spirits to seal Satoru Gojo. He's attempting to find what goes beyond the limits of the connection between humans and cursed energy. Using the Culling Game, Kenjaku plans to evolve humanity into something beyond jujutsu sorcerers and cursed spirits. The Culling Game is jujutsu terrorism on a scale never seen before in history, and Kenjaku is using it to usher in the return of the Golden Age of Jujutsu.</p> "
+
+
+    div3Content[1]="<h2> gojo</h2>"
+                    + "<p>Satoru Gojo is the first person in several hundred years to be born with boths, making him a near-unstoppable force. As cursed spirits increased so did the prominence of curse users, who used their abilities to curse others and exploit them for power. With Gojo's birth, the balance of the jujutsu world shifted the advantage back to the sorcerers dedicated to protecting humanity. </p>"
+    
+    div3Content[2]="<h2> hidden inventory </h2>"
+     + "<p> Jujutsu can also dictate fate by binding destinies together. The Six Eyes is connected to Tengen and the Star Plasma Vessel by this type of fate. Regardless of any outside interference, the Star Plasma Vessel and the Six Eyes would always appear on the day of Tengen's merger. Toji Fushiguro, an anomaly that had broken away from jujutsu completely, was able to shatter their destinies. This was the beginning of what would become a massive distortion in the jujutsu world.</p>"
+    div3Content[3]="<h2> the big three </h2>"
+    + "<p>In the modern era, Jujutsu Headquarters and the Big Three Sorcerer Families currently control the landscape of their community. The Big Three Sorcerer Families have existed since the Heian Era and have maintained their prominence thanks to powerful cursed techniques that are passed down through their families. The culture within these clans are obsessed with bloodline purity and passing down these inherited techniques.[5] In many cases, inheriting the clan's most coveted technique will automatically promote an individual to become the next head of the clan. </p>"
+    div3Content[4]="E";
+    div3Content[5]="f";
+    div3Content[6]="G";
+    function replaceContent(letter) {
+      var rightColumn = document.querySelector('#div3 .right-column');
+      rightColumn.innerHTML = letter;
+    }
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      var listItems = document.querySelectorAll('#div3 .left-column li');
+      listItems.forEach(function(item, i) {
+        item.addEventListener('click', function() {
+          replaceContent(div3Content[i]);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
